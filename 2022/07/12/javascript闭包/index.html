@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="javascript作用域, Hexo">
-    <meta name="description" content="二 闭包问题简单定义闭包简单来讲就是一个外部函数里面嵌套一个内部函数，内部函数引用了外部函数的变量等内容，外部函数将内部函数作为返回值(其实也未必要以返回值的形式，只要能够把内部函数传递出去就行），这就是一个闭包。
-有了闭包，这样就可以在外">
+    <meta name="keywords" content="javascript闭包, Hexo">
+    <meta name="description" content="闭包问题简单定义闭包简单来讲就是一个外部函数里面嵌套一个内部函数，内部函数引用了外部函数的变量等内容，外部函数将内部函数作为返回值(其实也未必要以返回值的形式，只要能够把内部函数传递出去就行），这就是一个闭包。
+有了闭包，这样就可以在外部函">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +20,7 @@
 
     
 
-    <title>javascript作用域 | Hexo</title>
+    <title>javascript闭包 | Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -393,12 +393,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">javascript作用域</h1>
+                    <h1 class="description center-align post-title">javascript闭包</h1>
                 </div>
             </div>
         </div>
@@ -553,7 +553,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.3k
                 </div>
                 
 
@@ -580,7 +580,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="二-闭包问题"><a href="#二-闭包问题" class="headerlink" title="二 闭包问题"></a>二 闭包问题</h2><h3 id="简单定义"><a href="#简单定义" class="headerlink" title="简单定义"></a>简单定义</h3><p><strong>闭包简单来讲就是一个外部函数里面嵌套一个内部函数，内部函数引用了外部函数的变量等内容，外部函数将内部函数作为返回值(其实也未必要以返回值的形式，只要能够把内部函数传递出去就行），这就是一个闭包。</strong></p>
+                <h2 id="闭包问题"><a href="#闭包问题" class="headerlink" title="闭包问题"></a>闭包问题</h2><h3 id="简单定义"><a href="#简单定义" class="headerlink" title="简单定义"></a>简单定义</h3><p><strong>闭包简单来讲就是一个外部函数里面嵌套一个内部函数，内部函数引用了外部函数的变量等内容，外部函数将内部函数作为返回值(其实也未必要以返回值的形式，只要能够把内部函数传递出去就行），这就是一个闭包。</strong></p>
 <p>有了闭包，这样就可以在外部函数以外的地方调用内部函数，本来一个函数结束，函数的内部所有东西都会释放掉，还给内存，局部变量都会消失。但是闭包却可以继续保持对该函数作用域的引用,闭包使得函数可以继续访问定义时的词法作用域。</p>
 <ul>
 <li>优点：使得外部可以访问内部函数等，延长内部函数等的寿命</li>
@@ -611,27 +611,25 @@
 <span class="token function">wait</span><span class="token punctuation">(</span><span class="token string">'你好呀'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>wait（）执行1000毫秒之后，它的内部作用域并不会消失，timer函数依然保持有wait()作用域的闭包</p>
-<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>模块模式需要具备两个条件</p>
-<p>1.必须有外部封闭函数，该函数必须至少被调用一次（每次调用都会创建一个新的模块实例）</p>
-<p>2.封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态。</p>
-<p>注意：一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。</p>
-<p>单例模块化（IIFE立刻执行函数）</p>
-<p><code>var module=(function m()&#123;</code></p>
-<p><code>var a=&quot;cool&quot;;</code></p>
-<p><code>var b=[1,2,3];</code></p>
-<p><code>function f()&#123;</code></p>
-<p>    <code>console.log(a);</code></p>
-<p><code>&#125;</code></p>
-<p><code>function f1()&#123;</code></p>
-<p>    <code>console.log(b.join(&#39;!&#39;));</code></p>
-<p><code>&#125;</code></p>
-<p><code>return &#123;</code></p>
-<p>    <code>f:f,</code></p>
-<p>    <code>f1:f1</code></p>
-<p><code>&#125;</code></p>
-<p><code>&#125;)();</code></p>
-<p><code>module.f();//&#39;cool&#39;</code></p>
-<p><code>module.f1();//1!2!3</code></p>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>模块模式需要具备两个条件<br>1.必须有外部封闭函数，该函数必须至少被调用一次（每次调用都会创建一个新的模块实例）<br>2.封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态。</p>
+<p>注意：一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。<br>单例模块化（IIFE立刻执行函数）</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> module<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token function">m</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">var</span> a<span class="token operator">=</span><span class="token string">"cool"</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> b<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'!'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> <span class="token punctuation">{</span>
+    f<span class="token punctuation">:</span>f<span class="token punctuation">,</span>
+    f1<span class="token punctuation">:</span>f1
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//'cool'</span>
+module<span class="token punctuation">.</span><span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//1!2!3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="三-this指向问题"><a href="#三-this指向问题" class="headerlink" title="三 this指向问题"></a>三 this指向问题</h2><p>this是在运行是绑定的，它的上下文取决于函数调用时的各种条件。this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
 <h4 id="默认绑定-this指向全局对象window"><a href="#默认绑定-this指向全局对象window" class="headerlink" title="默认绑定(this指向全局对象window)"></a>默认绑定(this指向全局对象window)</h4><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -782,12 +780,23 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ol>
 <li>this四条规则的优先级就不一一细说，new绑定&gt;显式绑定&gt;隐式绑定&gt;默认绑定（可参考《你不知道的javaScript上》91~95页）</li>
 <li>当call、apply、bind需要忽略this绑定时，可以传入null(但是会改变this绑定，函数中如果使用this会绑定到全局对象)，可以用∅。</li>
-<li>还有一种叫软绑定的（好像很复杂。。。。《你不知道的javaScript上》98 有空再看看吧）</li>
-<li>特殊的箭头函数，箭头函数中的this指的是其外层作用域.<br>&#96;&#96;&#96;javascript<br>function f(a){<br>return (a)&#x3D;&gt;{<br> &#x2F;&#x2F;这里面的this是f里的<br> console.log(this.a);<br>  }<br>}</li>
+<li>特殊的箭头函数，箭头函数中的this指的是其外层作用域.</li>
 </ol>
-<p>var obj1&#x3D;{<br>  a:1<br>}</p>
-<p>var obj2&#x3D;{<br>  a:2<br>}</p>
-<p>var other&#x3D;f.call(obj1);<br>other.call(obj2);&#x2F;&#x2F;1</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">return</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//这里面的this是f里的</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> obj1<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> obj2<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">2</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> other<span class="token operator">=</span>f<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+other<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -1597,7 +1606,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
             
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">94.9k</span>
+                        class="white-color">81.2k</span>
             
             
             

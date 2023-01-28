@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="javascript之this, Hexo">
-    <meta name="description" content="三 this指向问题this是在运行是绑定的，它的上下文取决于函数调用时的各种条件。this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。
+    <meta name="description" content="this指向问题this是在运行是绑定的，它的上下文取决于函数调用时的各种条件。this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。
 默认绑定(this指向全局对象window)function f(){
-console">
+console.l">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -554,7 +554,7 @@ console">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    726
+                    710
                 </div>
                 
 
@@ -581,7 +581,7 @@ console">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="三-this指向问题"><a href="#三-this指向问题" class="headerlink" title="三 this指向问题"></a>三 this指向问题</h2><p>this是在运行是绑定的，它的上下文取决于函数调用时的各种条件。this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
+                <h2 id="this指向问题"><a href="#this指向问题" class="headerlink" title="this指向问题"></a>this指向问题</h2><p>this是在运行是绑定的，它的上下文取决于函数调用时的各种条件。this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
 <h4 id="默认绑定-this指向全局对象window"><a href="#默认绑定-this指向全局对象window" class="headerlink" title="默认绑定(this指向全局对象window)"></a>默认绑定(this指向全局对象window)</h4><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -732,11 +732,23 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>this四条规则的优先级就不一一细说，new绑定&gt;显式绑定&gt;隐式绑定&gt;默认绑定（可参考《你不知道的javaScript上》91~95页）</li>
 <li>当call、apply、bind需要忽略this绑定时，可以传入null(但是会改变this绑定，函数中如果使用this会绑定到全局对象)，可以用∅。</li>
 <li>还有一种叫软绑定的（好像很复杂。。。。《你不知道的javaScript上》98 有空再看看吧）</li>
-<li>特殊的箭头函数，箭头函数中的this指的是其外层作用域.<br>&#96;&#96;&#96;javascript<br>function f(a){<br>return (a)&#x3D;&gt;{<br> &#x2F;&#x2F;这里面的this是f里的<br> console.log(this.a);<br>  }<br>}</li>
+<li>特殊的箭头函数，箭头函数中的this指的是其外层作用域.<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">return</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+ <span class="token comment" spellcheck="true">//这里面的this是f里的</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> obj1<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">1</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> obj2<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">2</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> other<span class="token operator">=</span>f<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+other<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ol>
-<p>var obj1&#x3D;{<br>  a:1<br>}</p>
-<p>var obj2&#x3D;{<br>  a:2<br>}</p>
-<p>var other&#x3D;f.call(obj1);<br>other.call(obj2);&#x2F;&#x2F;1<br>&#96;&#96;&#96;</p>
 
                 
             </div>
@@ -1546,7 +1558,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
             
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">94.9k</span>
+                        class="white-color">81.2k</span>
             
             
             
