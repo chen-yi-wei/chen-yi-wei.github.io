@@ -1,0 +1,2811 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Hexo">
+    <meta name="description" content="JavaScript基础ECMAScriptJavaScript的数据类型有几种？8种，但是红宝书是7，没有bigint
+基本数据类型
+Number 数字类型
+String 字符串类型
+Boolean 布尔类型
+Undefined 未定义类">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    
+
+    <title>Hexo</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },2500); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+</script>
+
+ 
+<body>
+    
+        <div id="loading-container">
+             <p class="loading-text">别催了~  正在从服务器偷取页面 . . . </p> 
+             <div class="loading-image">
+                 <div></div>
+                 <div></div>
+                 <div></div>
+                 <div></div> 
+                 <div></div>
+             </div>
+        </div>
+    
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <div class="logo-name">Hexo</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-01-28
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-01-28
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    10.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    42 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="JavaScript基础"><a href="#JavaScript基础" class="headerlink" title="JavaScript基础"></a>JavaScript基础</h1><h2 id="ECMAScript"><a href="#ECMAScript" class="headerlink" title="ECMAScript"></a>ECMAScript</h2><h3 id="JavaScript的数据类型有几种？"><a href="#JavaScript的数据类型有几种？" class="headerlink" title="JavaScript的数据类型有几种？"></a>JavaScript的数据类型有几种？</h3><p>8种，但是红宝书是7，没有bigint</p>
+<p>基本数据类型</p>
+<p>Number 数字类型</p>
+<p>String 字符串类型</p>
+<p>Boolean 布尔类型</p>
+<p>Undefined 未定义类型</p>
+<p>Null 空类型</p>
+<p>Symbol symbol类型</p>
+<p>Bigint 大数字类型</p>
+<p>引用数据类型</p>
+<p>Object 对象类型</p>
+<h3 id="undeclared-与-undefined的区别？"><a href="#undeclared-与-undefined的区别？" class="headerlink" title="undeclared 与 undefined的区别？"></a>undeclared 与 undefined的区别？</h3><p>undefined：声明了变量，但是没有赋值</p>
+<p>undecalared：没有声明变量就直接使用</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> name<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//undefined</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//undecalared</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="数组、字符串一些方法"><a href="#数组、字符串一些方法" class="headerlink" title="数组、字符串一些方法"></a>数组、字符串一些方法</h3><p>splice 与 slice 的区别？（待完善。。。）</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数</th>
+<th>用法区别</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>splice</td>
+<td>splice(start, num, item1, item2, …)</td>
+<td>从数组中添加或删除元素，然后返回被删除的数组元素，会改变原始数组</td>
+<td>1个参数的位置开始一直截取到最后 ；</td>
+</tr>
+<tr>
+<td>slice</td>
+<td>slice(start, end)</td>
+<td>从已有的数组中返回你选择的某段数组元素，不会改变原始数组（左闭右开）</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>substr 和 substring 的区别？</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>substr</td>
+<td>substr(start,length)</td>
+</tr>
+<tr>
+<td>substring</td>
+<td>substring(start,end)</td>
+</tr>
+</tbody></table>
+<p>includes 比 indexOf好在哪？</p>
+<p>includes可以检测<code>NaN</code>，indexOf不能检测<code>NaN</code>，includes内部使用了<code>Number.isNaN</code>对<code>NaN</code>进行了匹配</p>
+<h3 id="判断变量类型的方式"><a href="#判断变量类型的方式" class="headerlink" title="判断变量类型的方式"></a>判断变量类型的方式</h3><p><strong>typeof</strong></p>
+<p>能判断string、number、undefined、boolean、function(返回function)、object（null是object）</p>
+<p>适合判断一个变量是否是字符串、数值、布尔值、undefined</p>
+<p><strong>instanceof</strong></p>
+<p>适合判断引用类型</p>
+<p><strong>Object.prototype.toString.call()</strong></p>
+<p><code>Object.prototype.toString.call(b)//[object Number]</code></p>
+<p>能判断大部分数据类型</p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><h4 id="转化为String"><a href="#转化为String" class="headerlink" title="转化为String"></a>转化为String</h4><p>方法一：</p>
+<p>调用被转换数据类型.toString()方法</p>
+<p>但是null,undefined不能用这种方法,会报错</p>
+<p><code>var a=12;</code></p>
+<p>&#96;&#96;console.log(a.toString());&#96;</p>
+<p>可以用toString()的原理是，因为如上例的a是Number()(其实它是原生函数来的，类似构造函数）的一个实例，所以根据原型链继承的内容，就可以知道之所以各种类型可以调用toString（）方法，其实是继承自Object.prototype，调用的是Object.prototype.toString方法。因为null和undefined没有原生函数，所以不能调用这个方法。</p>
+<p>    方法二：</p>
+<p>    调用String(),括号填转的数据</p>
+<p>    null-&gt;”null”</p>
+<p>    undefined-&gt;”undefined”</p>
+<p>    方法三(隐式转换)</p>
+<p>    使用+、-、*、&#x2F;拼接字符串的方法实现转换效果</p>
+<p>    var num&#x3D;15</p>
+<p>    console.log(num+’ ‘);</p>
+<p>补充，其实JSON.stringify也可以算转换，但是其实它用到的还是toString,JSON的具体会在后面展开。</p>
+<h4 id="转化为Number"><a href="#转化为Number" class="headerlink" title="转化为Number"></a>转化为Number</h4><p>    方法一：</p>
+<p>    Number()函数</p>
+<p>    字符串转数字，如果是纯属数字，就直接转； 如果有非数字，则  转化为NaN；如果是空串或者空格串，转为0</p>
+<p>    布尔转数字：true-&gt;1，false-&gt;0</p>
+<p>     null-&gt;0</p>
+<p>     undefined-&gt;NaN</p>
+<p>    Symbol无法转换为数字，会报错：Uncaught TypeError:   Cannot convert a Symbol value to a number</p>
+<p>BigInt会去除n</p>
+<p>Number(12n)&#x2F;&#x2F;12</p>
+<p>对象转换为数字，会按照下面的步骤去执行</p>
+<p>1.对对象进行Toprimitive操作</p>
+<p>2.进行内部操作DefaultValue,检查该值是否有valueof方法，有则返回基本类型值，使用该值进行强制类型转换；没有则使用toString()的返回值进行强制类型转换，都没有则TypeError</p>
+<p><code>var obj=&#123;</code></p>
+<p><code>valueOf:()=&gt;23</code></p>
+<p><code>&#125;</code></p>
+<p><code>console.log(Number(obj));//23</code></p>
+<p>      parseInt()把字符串里有效的整数读出转为整数</p>
+<p>      parseFloat()把字符串转为浮点数</p>
+<p>      如果是非String，先转String,再转整数</p>
+<p>      注意：console.log(paresInt(‘rem120px’))—-&gt;NaN</p>
+<p>         console.log(paresInt(‘120px’))—-&gt;120</p>
+<p>         因为第一个字符串的第一个字母不是数字</p>
+<p>     方法三</p>
+<p>     利用运算符 -、*、&#x2F;  隐式转换</p>
+<p>     <code>console.log(&#39;12&#39;-0)</code></p>
+<p>     <code>console.log(&#39;12&#39;*1)</code></p>
+<p>     <code>console.log(&#39;12&#39;/1)</code></p>
+<h4 id="转化为Boolean"><a href="#转化为Boolean" class="headerlink" title="转化为Boolean"></a>转化为Boolean</h4><p>    显式</p>
+<p>Boolean()</p>
+<p>0&#x2F;NaN&#x2F;空字符串&#x2F;null&#x2F;undefined 会转化为false,其他均为true, 对象也会转化为true</p>
+<p>隐式</p>
+<p>隐式转换一般是在有逻辑判断、有逻辑元素符||、&amp;&amp;、！时触发。</p>
+<p>||和&amp;&amp;首先会对一个操作数进行条件判断，如果其不是布尔值，就先将其强制转换为boolean类型，然后再进行条件判断。</p>
+<p>对于||,如果条件判断结果为true就返回第一个操作数，false就返回第二个。</p>
+<p>&amp;&amp;是true就返回第二个操作数，false就返回第一个操作数。</p>
+<p><code>console.log(b||c);//12</code></p>
+<p><code>console.log(c||d);//23</code></p>
+<p><code>console.log(d&amp;&amp;c);//null(false返回第一个)</code></p>
+<p><code>console.log(b&amp;&amp;c);//23(true返回第二个)</code></p>
+<h4 id="和-x3D"><a href="#和-x3D" class="headerlink" title="和&#x3D;"></a>和&#x3D;</h4><p>和&#x3D;的区别是，允许在相等比较中进行强制类型转换，而&#x3D;不允许</p>
+<p>&#x3D;&#x3D;比较</p>
+<p>注意的是，NaN不等于NaN,+0等于-0</p>
+<p>1.数字和字符串</p>
+<p>根据ES5规范，其中一个为数字，一个为字符串，会将字符串转化为数字</p>
+<p><code>var a=42,b=&quot;42&quot;;</code></p>
+<p><code>a==b//true</code></p>
+<p>2.布尔值和其他</p>
+<p>会将其中的布尔值转化为数字再比较，如果是字符串和布尔值，先将布尔值转化为数字，再讲字符串转数字，再比较。</p>
+<p><code>var a=&quot;42&quot;,b=false;</code></p>
+<p><code>a==b //false false--&gt;0 &quot;42&quot;--&gt;42 42!=0</code></p>
+<p><code>&quot;0&quot;==false//true false--&gt;0 &quot;0&quot;--&gt;0 0==0</code></p>
+<p>3.null和undefined</p>
+<p><strong>一个为null,另一个是undefined是true (就是说&#x3D;&#x3D;中,null和undefined相等)</strong></p>
+<p>var a&#x3D;null,b;</p>
+<p>a&#x3D;&#x3D;b&#x2F;&#x2F;true</p>
+<p>b&#x3D;&#x3D;null &#x2F;&#x2F;true</p>
+<p>a0 a’’ a&#x3D;&#x3D;false &#x2F;&#x2F;都是false</p>
+<p>4.对象与非对象</p>
+<p>会对对象调用Toprimitive操作</p>
+<p>var a&#x3D;”abc”,b&#x3D;new Object(a);</p>
+<p>a&#x3D;&#x3D;b&#x2F;&#x2F;true     b通过Toprimitive操作返回的是”abc”</p>
+<h4 id="Toprimitive是什么？"><a href="#Toprimitive是什么？" class="headerlink" title="Toprimitive是什么？"></a>Toprimitive是什么？</h4><h3 id="原生函数（内建函数）"><a href="#原生函数（内建函数）" class="headerlink" title="原生函数（内建函数）"></a>原生函数（内建函数）</h3><h4 id="原生函数是什么？"><a href="#原生函数是什么？" class="headerlink" title="原生函数是什么？"></a>原生函数是什么？</h4><p>JavaScript为基本数据类型提供了封装对象,被称为原生函数。类似于构造函数。</p>
+<h4 id="有哪些？"><a href="#有哪些？" class="headerlink" title="有哪些？"></a>有哪些？</h4><p><code>String()</code></p>
+<p><code>Number()</code></p>
+<p><code>Boolean()</code>   前3个是包装类</p>
+<p><code>Object()</code></p>
+<p><code>Array()</code></p>
+<p><code>Function()</code></p>
+<p><code>Date()</code></p>
+<p><code>Regxp()</code></p>
+<p><code>Error()</code></p>
+<p><code>Symbol()</code></p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><h5 id="类似构造函数"><a href="#类似构造函数" class="headerlink" title="类似构造函数"></a>类似构造函数</h5><p><code>var x=new String(&quot;abc&quot;);</code></p>
+<p><code>typeof x //object</code></p>
+<p><code>x instanceof String //true</code></p>
+<p><code>Object.prototype.toString.call(x) //[object String]</code></p>
+<p>x类似于构造函数String()创建的一个对象</p>
+<h5 id="内部属性-class"><a href="#内部属性-class" class="headerlink" title="内部属性[[class]]"></a>内部属性[[class]]</h5><p>所有typeof返回值是object的对象都有一个内部属性[[class]]，这个属性相应的构造函数对应，可以通过</p>
+<p><code>Object.prototype.toString.call()</code> 来查看</p>
+<p><code>Object.prototype.toString.call([1,2,3]);//[object Array]</code></p>
+<p><code>Object.prototype.toString.call(undefined);//[object Undefined]</code></p>
+<p><code>Object.prototype.toString.call(null);//[object Null]</code></p>
+<p>虽然null和undefined没有对应的原生构造函数，但是内部属性还是有Null和Undefined。</p>
+<p><code>Object.prototype.toString.call(&quot;abc&quot;);//[object String]</code></p>
+<p><code>Object.prototype.toString.call(12);//[object Number]</code></p>
+<p><code>Object.prototype.toString.call(true);//[object Boolean]</code></p>
+<p>这几个基本类型值被各自的封装对象自动包装，称为“包装”</p>
+<h5 id="封装、拆封"><a href="#封装、拆封" class="headerlink" title="封装、拆封"></a>封装、拆封</h5><p><strong>封装</strong></p>
+<p>因为基本类型值没有.length等属性和方法，所以需要通过封装对象才能访问，javascript会自动为基本类型值包装一个封装对象</p>
+<p><code>var a=&quot;abc&quot;;</code></p>
+<p><code>let x=a.length//3</code></p>
+<pre><code>封装过程
+var temp=new String(&quot;abc&quot;);
+var x=a.length
+temp=null;
+</code></pre>
+<p>自行封装基本类型值，可以使用Object（）函数</p>
+<p><code>var a=Object(&quot;abc&quot;);</code></p>
+<p><strong>拆封</strong></p>
+<p>想到得到封装对象中的基本类型值，用valueOf()或toString()函数</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"abc"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">typeof</span> a<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//string</span>
+<span class="token keyword">typeof</span> a<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//string</span>
+a<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//"abc"</span>
+a<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//"abc"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="原生原型"><a href="#原生原型" class="headerlink" title="原生原型"></a>原生原型</h5><p>构造函数都有原型，<code>String.prototype.indexOf()</code>可以简写成String#indexOf(…)</p>
+<h3 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h3><h5 id="object-对象"><a href="#object-对象" class="headerlink" title="object 对象"></a>object 对象</h5><p><strong>访问属性</strong></p>
+<p><code>var obj=&#123;a:1&#125;</code></p>
+<p>.方式 ：obj.a  （这种方式属性名要满足标识符规范，比如”obj-a”这样就得用下面这种方式）</p>
+<p>[“属性名”]：obj[“a”] （这种要传属性名字符串）</p>
+<p>可计算的属性名:</p>
+<p><code>var s=&quot;str&quot;;</code></p>
+<p><code>var obj=&#123; [s+&quot;a&quot;]:1&#125;;</code></p>
+<p><strong>对象复制</strong></p>
+<p>深复制</p>
+<p>对于引用类型，实现的是对其的克隆</p>
+<pre><code>function f()&#123;`
+
+  `console.log(&#39;1&#39;)`
+
+`&#125;`
+
+`var obj=&#123;`
+
+  `a:1,`
+
+  `fun:f`
+
+`&#125;`
+
+`var newobj=JSON.parse(JSON.stringify(obj));`
+
+`console.log(newobj.fun===f);//false
+</code></pre>
+<p>浅复制</p>
+<p>对于引用类型的属性，实现的是对其的引用</p>
+<pre><code>var newobj1=Object.assign(&#123;&#125;,obj);`
+
+`console.log(newobj1.fun===f);//true
+</code></pre>
+<p>Object.assign（）方法的一个参数是目标对象，之后可以是多个源对象，它会遍历源对象的所有可枚举的自有键并把它们复制到目标对象</p>
+<p>不同的对象在底层都表示为二进制,在javaScript中二进制前三位都为0的话会被判断为object类型，null的二进制表示是全0，自然前三位也为0，所以执行typeof时会返回object</p>
+<p><strong>对象属性包括数据属性和访问器属性</strong></p>
+<p><strong>数据属性</strong></p>
+<p>Object.getOwnPropertyDescriptor 获取属性对应的属性描述符</p>
+<p>Object.getOwnPropertyDescriptors</p>
+<p><code>var obj=&#123;</code></p>
+<p><code>a:2</code></p>
+<p><code>&#125;</code></p>
+<p><code>console.log(Object.getOwnPropertyDescriptor(obj,&quot;a&quot;));</code></p>
+<p><code>&#123;</code></p>
+<p><code>configurable: true//可配置，表示属性是否可以通过delete删除并重新定义，是否可以修改它的特性，是否可以把它修改为访问器属性</code></p>
+<p><code>enumerable: true//可枚举，是否可以用过for...in循环返回</code></p>
+<p><code>value: 2</code></p>
+<p><code>writable: true//可写 ，是否可以被修改</code></p>
+<p><code>&#125;</code></p>
+<p>Object.defineProperty() 添加一个新属性或者修改一个已有属性，虽然一般不用，但是它可以修改对应的属性描述符</p>
+<p>Object.defineProperties()</p>
+<p><code>var obj=&#123;&#125;</code></p>
+<p><code>Object.defineProperty(obj,&quot;a&quot;,&#123;</code></p>
+<p><code>value:2,</code></p>
+<p><code>writable:false,</code></p>
+<p><code>configurable:true,</code></p>
+<p><code>enumerable:true</code></p>
+<p><code>&#125;)</code></p>
+<p><code>obj.a=3;</code></p>
+<p><code>console.log(obj.a);//2</code></p>
+<p>对象或属性不可变</p>
+<p>对象常量：writable:false,configurable:false</p>
+<p>禁止扩展：Object.preventExtensions(obj) 禁止一个对象添加新属性并且保留已有属性</p>
+<p>密封：Object.seal() 把所有属性标记为configurable:false</p>
+<p>冻结：Object.freeze()创建一个冻结对象，调用Object.seal()并且把所有数据writable:false</p>
+<p><strong>访问器属性</strong></p>
+<p>对应属性描述符</p>
+<p>[[Configurable]]:同上</p>
+<p>[[Enumerable]]:同上</p>
+<p>[[Get]]:获取函数，读取属性时调用,默认值undefined</p>
+<p>[[Set]]:设置函数，写入属性时调用,默认值undefined</p>
+<p><code>var obj=&#123;</code></p>
+<p><code>//getter</code></p>
+<p><code>get a()&#123;</code></p>
+<p>    <code>return this._a_;</code></p>
+<p><code>&#125;,</code></p>
+<p><code>//setter</code></p>
+<p><code>set a(val)&#123;</code></p>
+<p>    <code>this._a_=2*val;</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;</code></p>
+<p><code>obj.a=2;</code></p>
+<p><code>console.log(obj.a);</code></p>
+<p><code>console.log(obj)</code></p>
+<p><strong>对象的创建</strong></p>
+<p>工厂模式</p>
+<p>构造函数模式</p>
+<p>原型模式</p>
+<p><strong>遍历</strong></p>
+<p>in 遍历属性名</p>
+<p>hasOwnProperty 好像也是属性名</p>
+<p>for…in 也是遍历属性名，最好只在对象用，数组用 for…of</p>
+<p>for…of 遍历属性值</p>
+<h5 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h5><p>Math、Date、RegExp、String、Number、Boolean、Object、Function、Array、Error</p>
+<p><code>var s=&quot;1314&quot;;//这是一个字面量</code></p>
+<p><code>console.log(typeof s);//string</code></p>
+<p><code>console.log(s instanceof String);//false</code></p>
+<p><code>var s1=new String(&#39;520&#39;);//这是一个对象</code></p>
+<p><code>console.log(typeof s1);//object</code></p>
+<p><code>console.log(s1 instanceof String);//true</code></p>
+<p>实际上，平时在字面量上访问属性或者方法，其实是因为引擎自动把字面量转换成为相应的对象</p>
+<p>比如</p>
+<p><code>var str=&#39;abc&#39;;</code></p>
+<p><code>console.log(str.length);</code></p>
+<p>实际上会转换为String对象</p>
+<h2 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h2><h3 id="操作元素-增删查改"><a href="#操作元素-增删查改" class="headerlink" title="操作元素(增删查改)"></a>操作元素(增删查改)</h3><table>
+<thead>
+<tr>
+<th>获取元素</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>querySelector(‘选择器’)</td>
+<td>通过选择器选择一个元素</td>
+</tr>
+<tr>
+<td>querySelectorAll(‘选择器’)</td>
+<td>通过选择器选择一组元素，是一个数组</td>
+</tr>
+<tr>
+<td>document.getElementById()</td>
+<td>通过id属性获取一个元素节点对象</td>
+</tr>
+<tr>
+<td>document.getElementsByClassName()</td>
+<td>根据class属性值获取一组元素节点对象</td>
+</tr>
+<tr>
+<td>document.getElementsByTagName()</td>
+<td>通过标签名获取一组元素对象,是伪数组</td>
+</tr>
+<tr>
+<td>document.getElementsByName()</td>
+<td>通过name属性获取一组元素节点对象，伪数组</td>
+</tr>
+<tr>
+<td>element.getElementById(‘标签名’)</td>
+<td>获取element元素里面的’标签名’的元素(例如ul里面的li)</td>
+</tr>
+<tr>
+<td><strong>获取其他</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>document.getElementsByTagName(“body”)[0]</td>
+<td>获取body标签</td>
+</tr>
+<tr>
+<td>document.body</td>
+<td>获取body标签</td>
+</tr>
+<tr>
+<td>document.documentElement</td>
+<td>获取html根标签</td>
+</tr>
+<tr>
+<td>document.all</td>
+<td>获取页面中所有的元素</td>
+</tr>
+</tbody></table>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><h4 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h4><p>分三个阶段事件捕获、到达目标、事件冒泡</p>
+<p>事件捕获</p>
+<p>最不具体（最外层）的节点应该最先收到事件，而最具体的节点（最内层）应该最后收到事件。</p>
+<p>下面div点击事件顺序是    document-&gt;html-&gt;body-&gt;div</p>
+<p>事件冒泡</p>
+<p>最具体的节点（最内层）的节点应该最先收到事件，而最不具体（最外层）应该最后收到事件。</p>
+<p>就是说事件是沿着DOM树一路向上的。</p>
+<p>上例div点击事件顺序是    div-&gt;body-&gt;html-&gt;document</p>
+<h3 id="23、绑定点击事件有几种方式？"><a href="#23、绑定点击事件有几种方式？" class="headerlink" title="23、绑定点击事件有几种方式？"></a>23、绑定点击事件有几种方式？</h3><p>三种</p>
+<ul>
+<li><code>xxx.onclick = function ()&#123;&#125;</code></li>
+<li><code>&lt;xxx onclick=&quot;&quot;&gt;&lt;/xxx&gt;</code></li>
+<li><code>xxx.addEventListener(&#39;click&#39;, function()&#123;&#125;, false)</code></li>
+</ul>
+<h3 id="24、addEventListener的第三个参数是干嘛的？"><a href="#24、addEventListener的第三个参数是干嘛的？" class="headerlink" title="24、addEventListener的第三个参数是干嘛的？"></a>24、addEventListener的第三个参数是干嘛的？</h3><p>决定事件是<code>捕获阶段</code>执行还是<code>冒泡阶段</code>执行</p>
+<ul>
+<li><code>true</code>：捕获</li>
+<li><code>false</code>：默认，冒泡</li>
+</ul>
+<h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><h2 id="一些错误"><a href="#一些错误" class="headerlink" title="一些错误"></a>一些错误</h2><p>ReferenceError  作用域判别失败</p>
+<p>TypeError 表示作用域判别成功了，但是对结果的操作是非法的或不合理的</p>
+<h1 id="JavaScript进阶"><a href="#JavaScript进阶" class="headerlink" title="JavaScript进阶"></a>JavaScript进阶</h1><h2 id="一-作用域问题"><a href="#一-作用域问题" class="headerlink" title="一 作用域问题"></a>一 作用域问题</h2><h3 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h3><p>词法作用域就是指作用域是由<strong>代码中函数声明的位置来决定的</strong>，所以词法作用域是<strong>静态的作用域</strong>，通过它就能够预测代码在执行过程中如何查找标识符</p>
+<pre><code>var a=2;//如果注释这一行结果是undefined
+
+function f()&#123;
+  console.log(a);
+&#125;
+
+function f1()&#123;
+  var a=3;
+  f();
+&#125;
+
+f1();//2
+</code></pre>
+<p>这个例子是一个常见的问题，或许多数人会认为调用f1应该输出的是3，会把这个问题理解成一个作用域链的问题，但是其实不全是，第九行是<strong>f函数在f1里面调用，不是在f1里定义，f的上级作用域是全局，</strong>所以其实作用域链是<strong>f函数作用域–&gt;全局作用域和f1函数作用域–&gt;全局作用于，</strong>所以调用f1输出的是3。这就是体现了一个词法作用域的概念，就是它是一个静态的作用域，是编写代码时决定的，跟在哪里调用没关系。</p>
+<p>改成如下，作用域就是<strong>f函数作用域–&gt;f1函数作用域–&gt;全局作用域</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果注释这一行结果是undefined</span>
+
+<span class="token keyword">function</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span>
+  <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+   <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><p>全局作用域就是在程序任何地方都能访问，window对象的内置属性都属于全局作用域</p>
+<h3 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h3><p>函数作用域指的是，属于这个函数的全部变量可以在函数的范围内使用，但是函数外不行。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 同样的变量,已重复赋值</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 2</span>
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 2</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>调用栈如下</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/25385691/1658299563727-13d8af3d-5221-4af2-bdb7-42a15493e84f.jpeg"><br>因为变量x处于函数test的执行上下文中，函数test编译后变量x的值首先为undefined，接着执行赋值语句，先赋值为1，之后又赋值为2，所以，执行最后两个输出语句时，输出的值是2</p>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>简单理解就是{ }内的作用域就称为块级作用域，比如if、while等括号里。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span>a<span class="token operator">===</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">let</span> b<span class="token operator">=</span><span class="token number">2</span><span class="token operator">*</span>a<span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//4</span>
+<span class="token punctuation">}</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//报错uncaught ReferenceError: b is not defined，如果let改成var就是4</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>let不会在块级作用域变量提升，var会</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//报错uncaught ReferenceError: b is not defined，如果let改成var就是undefined</span>
+<span class="token keyword">let</span> a<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>例子分析：</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//把上面的test例子的x变量用let定义</span>
+<span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> y<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> z<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 同样的变量,已重复赋值</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 2</span>
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 1</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//3</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>test的执行上下文：<br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/25385691/1658301762871-b0d0d6a2-abc8-4622-89c9-1755f7266489.jpeg"><br>上面的图是test执行到第8行后的执行上下文，let声明的变量和var的不同，函数内部通过var声明的变量，在编译阶段全都var被存放到变量环境里面了，通过let声明的变量会在编译阶段会被存放到词法环境（Lexical Environment）中，而且<strong>不同块是不同是词法环境，</strong>if块是单独的一个环境。<strong>词法环境是一个栈结构，</strong>第9行的输出是if块里的x为2，之后块执行完毕，<strong>if块的环境弹出</strong>，之后输出的x是底下的1。<br><strong>一个变量的查找的过程的从词法环境的栈顶到栈底，再从变量环境里从底往上找(如上图的红线）</strong></p>
+<h3 id="var、let、const的区别"><a href="#var、let、const的区别" class="headerlink" title="var、let、const的区别"></a>var、let、const的区别</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>作用域</th>
+<th>变量提升</th>
+<th>重复声明同一变量</th>
+<th>声明的变量能否改</th>
+<th>成为window对象的属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>var</td>
+<td>函数作用域</td>
+<td>有</td>
+<td>可以</td>
+<td>能</td>
+<td>是</td>
+</tr>
+<tr>
+<td>let</td>
+<td>块级作用域</td>
+<td>没有</td>
+<td>不可以</td>
+<td>能</td>
+<td>否</td>
+</tr>
+<tr>
+<td>const</td>
+<td>块级作用域</td>
+<td>没有</td>
+<td>不可以</td>
+<td>不能</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<p>一个常见的问题</p>
+<pre><code>for(var i = 0; i &lt; 5; i++)&#123;
+  setTimeout(function()&#123;
+      console.log(i);   
+  &#125;,0); 
+&#125;;//5 5 5 5 5
+解决方法
+方法一
+for(let i = 0; i &lt; 5; i++)&#123;
+  setTimeout(function()&#123;
+      console.log(i);   
+  &#125;,0); 
+&#125;;
+方法二
+for (var i = 0; i &lt; 5; i++) &#123;
+    (function(i) &#123;
+      setTimeout(function () &#123;
+        console.log(i);
+      &#125;, 0)
+    &#125;)(i)
+  &#125;;
+</code></pre>
+<h3 id="什么是暂时性死区？"><a href="#什么是暂时性死区？" class="headerlink" title="什么是暂时性死区？"></a>什么是暂时性死区？</h3><p>MDN上的定义：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let?retiredLocale=he">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let?retiredLocale=he</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6983702070293430303">https://juejin.cn/post/6983702070293430303</a></p>
+<blockquote>
+<p>个人感觉不用去纠结let有没有变量提升，变量提升就是一段代码在编译阶段是能够识别到var和let创建的变量的，只会对二者的操作不一样：对var定义的变量初始化为undefined，而let定义的变量仍然处于未初始化状态。</p>
+</blockquote>
+<p>在用let声明某变量之前引用该变量，就会出现暂时性死区。其实就是因为let没有变量提升，而var有。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>abc<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//报错 Cannot access 'abc' before initialization</span>
+<span class="token keyword">let</span> abc<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><h4 id="主要有以下3条规律："><a href="#主要有以下3条规律：" class="headerlink" title="主要有以下3条规律："></a>主要有以下3条规律：</h4><p><strong>1.变量和函数在内的所有声明都会在执行代码前先被处理,先编译后执行。</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//相当于   var a;a=2;console.log(a);</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//2</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//相当于  var b; console.log(b); b=1;</span>
+<span class="token keyword">var</span> b<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//undefined</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>2.函数声明会提升，但是函数表达式不会</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//2</span>
+
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//TypeError</span>
+
+<span class="token keyword">var</span> f1<span class="token operator">=</span><span class="token keyword">function</span> <span class="token function">fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token operator">...</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>3.变量和函数名称相同时，函数会先提升，然后才是变量（个人感觉这个结论不太对）</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//1</span>
+
+<span class="token keyword">var</span> f<span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+f<span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>如果定义了两个同名的函数，后定义的会覆盖前定义的</p>
+</blockquote>
+<p>总结1：<br>:::info<br><strong>所谓的变量提升，是指在JavaScript代码执行过程中，JavaScript引擎把变量的声明部分和函数的声明部分提升到代码开头的“行为”。变量被提升后，会给变量设置默认值undefined</strong>。<br>:::</p>
+<h4 id="变量提升的原理"><a href="#变量提升的原理" class="headerlink" title="变量提升的原理"></a>变量提升的原理</h4><p>一段JavaScript代码在执行之前需要被JavaScript引擎编译，编译完成之后，才会进入执行阶段<br><strong>编译阶段</strong><br>编译的结果是形成执行上下文和可执行代码，<br><strong>执行上下文</strong>是JavaScript执行一段代码时的运行环境，比如调用一个函数，就会进入这个函数的执行上下文，确定该函数在执行期间用到的诸如this、变量、对象以及函数等。执行上下文中存在一个变量环境的对象（Viriable Environment），该对象中保存了变量提升的内容。<br><strong>可执行代码</strong>就是除了声明外的代码</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">1</span>
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'函数'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这段代码在编译时，第3行有var声明的变量，js引擎会在在环境对象中创建一个名为a的属性，并使用undefined对其初始化，第4行有一个通过function定义的函数，所以它将函数定义存储到堆(heap）中，并在环境对象中创建一个f的属性，然后将该属性值指向堆中函数的位置。<br>在执行阶段的时候函数f执行输出<strong>“函数”</strong>，执行第二行时，环境对象中a的值为<strong>undefined</strong>，输出undefined，之后再执行<strong>a&#x3D;1</strong></p>
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p>一般情况下，变量取值到创建这个变量的函数作用域去取值，但是如果在当前作用域中没有查找到值，就会想上级作用域去查找，直到查到全局作用域，这么查找的过程形成的链条叫作用域链。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">var</span> b<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+  <span class="token keyword">function</span> <span class="token function">f1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> f1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> x<span class="token operator">=</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">x</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="二-上下文"><a href="#二-上下文" class="headerlink" title="二 上下文"></a>二 上下文</h2><h3 id="全局上下文："><a href="#全局上下文：" class="headerlink" title="全局上下文："></a>全局上下文：</h3><p>只有一个，其实就是window对象，所有<strong>通过var定义的全局变量和函数</strong>都会成为window对象的属性和方法，（let、const的顶级声明不会定义在全局上下文中），上下文在其所有代码都执行完毕后会被销毁。</p>
+<h3 id="函数执行上下文"><a href="#函数执行上下文" class="headerlink" title="函数执行上下文:"></a>函数执行上下文:</h3><p>有无数个，每个函数调用都有自己的上下文，当代码执行流进入函数时，函数的上下文被推到一个上下文栈中，当函数执行完毕后，上下文栈会弹出该函数上下文，将控制权返还给之前的上下文栈上。</p>
+<h3 id="调用栈"><a href="#调用栈" class="headerlink" title="调用栈"></a>调用栈</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">let</span> a<span class="token operator">=</span><span class="token number">1</span>
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">let</span> b<span class="token operator">=</span><span class="token number">2</span>
+  <span class="token keyword">let</span> res<span class="token operator">=</span><span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> res
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token operator">+</span>y<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这段代码的执行时栈如下：<br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/25385691/1658298655944-4b4b3eab-1e73-4d42-a1b9-74085e180c88.jpeg"></p>
+<h3 id="执行上下文和作用域的区别"><a href="#执行上下文和作用域的区别" class="headerlink" title="执行上下文和作用域的区别"></a>执行上下文和作用域的区别</h3><h4 id="区别1"><a href="#区别1" class="headerlink" title="区别1"></a>区别1</h4><p>全局作用域之外，每个函数都会创建自己的作用域，作用域在函数定义时已经确定了，而不是在函数调用时。<br>全局执行上下文是在全局作用域确定后，js代码马上执行之前创建。<br>函数执行上下文是在调用函数时，函数体代码马上执行前创建。</p>
+<h4 id="区别2"><a href="#区别2" class="headerlink" title="区别2"></a>区别2</h4><p>作用域是<strong>静态的</strong>，只要函数定义好了就一直存在，并且不再发生变化。<br>执行上下文时<strong>动态的</strong>，调用函数时创建，调用结束后就会自动释放。</p>
+<blockquote>
+<p>全局执行上下文存在在整个页面的生存周期内，全局执行上下文只有一份<br>函数执行上下文在函数执行结束之后会被销毁</p>
+</blockquote>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>区别3</p>
+<p>执行上下文对象是从属于所在的作用域<br>全局上下文环境—-&gt;全局作用域<br>函数上下文环境—-&gt;对应的函数作用域</p>
+<h2 id="二-闭包问题"><a href="#二-闭包问题" class="headerlink" title="二 闭包问题"></a>二 闭包问题</h2><h3 id="简单定义"><a href="#简单定义" class="headerlink" title="简单定义"></a>简单定义</h3><p><strong>闭包简单来讲就是一个外部函数里面嵌套一个内部函数，内部函数引用了外部函数的变量等内容，外部函数将内部函数作为返回值(其实也未必要以返回值的形式，只要能够把内部函数传递出去就行），这就是一个闭包。</strong></p>
+<p>有了闭包，这样就可以在外部函数以外的地方调用内部函数，本来一个函数结束，函数的内部所有东西都会释放掉，还给内存，局部变量都会消失。但是闭包却可以继续保持对该函数作用域的引用,闭包使得函数可以继续访问定义时的词法作用域。</p>
+<ul>
+<li>优点：使得外部可以访问内部函数等，延长内部函数等的寿命</li>
+<li>缺点：滥用闭包造成内存泄露</li>
+</ul>
+<p>如下为一个简单的闭包：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+  <span class="token keyword">function</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> inner<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> other<span class="token operator">=</span><span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">other</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//2</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>本来outer函数执行完之后，它的执行上下文应该是会被销毁的，但是通过inner（outer函数的闭包），在outer函数执行结束后还能打印出a的值</p>
+<p><strong>调用栈的变化如下：</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/25385691/1658306075281-82b4dd56-c89c-48b8-8aea-624be31669d3.jpeg"></p>
+<p>其实other函数的执行上下文中并没有变量a，当other函数执行到输入变量a时，其实是从作用域链<strong>other函数作用域–&gt;outer函数的闭包–&gt;全局作用域，</strong></p>
+<h3 id="使用回调函数也是闭包"><a href="#使用回调函数也是闭包" class="headerlink" title="使用回调函数也是闭包"></a>使用回调函数也是闭包</h3><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">wait</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">wait</span><span class="token punctuation">(</span><span class="token string">'你好呀'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>wait（）执行1000毫秒之后，它的内部作用域并不会消失，timer函数依然保持有wait()作用域的闭包</p>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>模块模式需要具备两个条件</p>
+<p>1.必须有外部封闭函数，该函数必须至少被调用一次（每次调用都会创建一个新的模块实例）</p>
+<p>2.封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态。</p>
+<p>注意：一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。</p>
+<p>单例模块化（IIFE立刻执行函数）</p>
+<p><code>var module=(function m()&#123;</code></p>
+<p><code>var a=&quot;cool&quot;;</code></p>
+<p><code>var b=[1,2,3];</code></p>
+<p><code>function f()&#123;</code></p>
+<p>    <code>console.log(a);</code></p>
+<p><code>&#125;</code></p>
+<p><code>function f1()&#123;</code></p>
+<p>    <code>console.log(b.join(&#39;!&#39;));</code></p>
+<p><code>&#125;</code></p>
+<p><code>return &#123;</code></p>
+<p>    <code>f:f,</code></p>
+<p>    <code>f1:f1</code></p>
+<p><code>&#125;</code></p>
+<p><code>&#125;)();</code></p>
+<p><code>module.f();//&#39;cool&#39;</code></p>
+<p><code>module.f1();//1!2!3</code></p>
+<h2 id="三-this指向问题"><a href="#三-this指向问题" class="headerlink" title="三 this指向问题"></a>三 this指向问题</h2><p>this是在运行是绑定的，它的上下文取决于函数调用时的各种条件。this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
+<h4 id="默认绑定-this指向全局对象window"><a href="#默认绑定-this指向全局对象window" class="headerlink" title="默认绑定(this指向全局对象window)"></a>默认绑定(this指向全局对象window)</h4><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//2</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在以上代码中，f()是不带任何修饰的函数引用进行调用的，所以是属于默认绑定</p>
+<h4 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h4><pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+  f<span class="token punctuation">:</span>f   
+<span class="token punctuation">}</span>
+
+obj<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//2</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这种情况是函数的引用有上下文对象的（obj对象的上下文），所以隐式绑定规则会把函数调用中的this绑定到这个上下文对象</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">22</span><span class="token punctuation">,</span>
+  f<span class="token punctuation">:</span>f
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj1<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span>
+ obj<span class="token punctuation">:</span>obj
+<span class="token punctuation">}</span>
+
+obj1<span class="token punctuation">.</span>obj<span class="token punctuation">.</span><span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>引用的是最接近的变量a</strong></p>
+<p>注意，<strong>将如上要调用的函数赋值给另外变量后,”隐式“会消失</strong><br>以下3个例子都属于赋值操作，setTimeout()函数实现也是类似的<br>例一:</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+   a<span class="token punctuation">:</span><span class="token number">22</span><span class="token punctuation">,</span>
+   f<span class="token punctuation">:</span>f
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> other<span class="token operator">=</span>obj<span class="token punctuation">.</span>f<span class="token punctuation">;</span>
+<span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">123</span>
+
+<span class="token function">other</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//123</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>例二：</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">fun</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">22</span><span class="token punctuation">,</span>
+  f<span class="token punctuation">:</span>f
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">123</span>
+<span class="token function">fun</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//123</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>相当于将f赋值给func</strong></p>
+<p>例三:</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">22</span><span class="token punctuation">,</span>
+  f<span class="token punctuation">:</span>f
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">123</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>f<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//123</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="显式绑定"><a href="#显式绑定" class="headerlink" title="显式绑定"></a>显式绑定</h4><p>指定某个对象为函数调用时的this，<strong>call、apply、bind函数</strong></p>
+<p><strong>call</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">22</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> other<span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  f<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">other</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//22</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span>other<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//22</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>apply</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token operator">+</span>b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">22</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> other<span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">return</span> f<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>argumments<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//argumments是固定变量，不能改名</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> res<span class="token operator">=</span><span class="token function">other</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//22 3</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//25</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>bind</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">{</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token operator">+</span>b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">bind</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span>obj<span class="token punctuation">)</span><span class="token punctuation">{</span>
+ <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> f<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>arguments<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> obj<span class="token operator">=</span><span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span><span class="token number">22</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> other<span class="token operator">=</span><span class="token function">bind</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span>obj<span class="token punctuation">)</span>
+<span class="token keyword">var</span> res<span class="token operator">=</span><span class="token function">other</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//22 3</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//25</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h4><p>所有函数都可以用new来调用，new调用的过程见下文  <strong>使用new操作符创建构造函数的实例整个过程？</strong></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token operator">=</span>a<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> other<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">f</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>other<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//2</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ol>
+<li>this四条规则的优先级就不一一细说，new绑定&gt;显式绑定&gt;隐式绑定&gt;默认绑定（可参考《你不知道的javaScript上》91~95页）</li>
+<li>当call、apply、bind需要忽略this绑定时，可以传入null(但是会改变this绑定，函数中如果使用this会绑定到全局对象)，可以用∅。</li>
+<li>还有一种叫软绑定的（好像很复杂。。。。《你不知道的javaScript上》98 有空再看看吧）</li>
+<li>特殊的箭头函数，箭头函数中的this指的是其外层作用域.<br>&#96;&#96;&#96;javascript<br>function f(a){<br>return (a)&#x3D;&gt;{<br> &#x2F;&#x2F;这里面的this是f里的<br> console.log(this.a);<br>  }<br>}</li>
+</ol>
+<p>var obj1&#x3D;{<br>  a:1<br>}</p>
+<p>var obj2&#x3D;{<br>  a:2<br>}</p>
+<p>var other&#x3D;f.call(obj1);<br>other.call(obj2);&#x2F;&#x2F;1</p>
+<pre><code>
+## 四 构造函数、原型链、继承、类
+
+### 构造函数
+
+#### 什么是构造函数？
+
+其实构造函数和普通函数没有特别的区别，任何普通函数只要使用了new操作符就是构造函数。（一般构造函数名的首字母是大写，普通函数小写），如下
+
+
+
+#### 使用new操作符创建构造函数的实例整个过程？
+
+例如上面例子，
+
+1.首先在内存显式创建一个新对象。
+
+2.将新对象的[[prototype]]属性赋值为构造函数的prototype属性。
+
+3.构造函数内部的this赋值为这个新对象（这个就是this指向的第四种情况）
+
+4.执行构造函数内部的代码，给新对象添加属性。
+
+5.如果构造函数返回非空对象，则返回该对象；否则，返回刚创建的对象。
+
+注意，
+
+dog的constructor属性会指向Dog构造函数
+
+Dog的prototype属性和dog的 ** proto ** 指向同一个原型对象。
+
+
+
+#### 构造函数存在的问题？
+
+当构造函数里面有定义方法时，创建实例时都会创建方法，而不是指向同一个方法？
+
+
+
+解决方法？
+
+实际上
+
+this.sayName=function()&#123;console.log(this.name); &#125;等价于this.sayName=new function()&#123;console.log(this.name);&#125;
+
+所以每个实例的方法都不是指向同一个
+
+这样就可以了，this指向是第二种隐式绑定
+
+
+
+上面问题用原型解决更好，使用原型对象的好处就是在原型对象上定义的属性和方法都可以被对象共享（所以在原型对象上定义sayName方法就可以实现应用同一个函数）
+
+
+
+注意，如果用 下面这样改要加上constructor
+
+
+
+[[prototype]]是什么？
+
+所有对象在创建时都会生成一个[[prototype]]属性（包括函数，对象，数组等Object类型），几乎都会被赋予一个非空的值。
+
+介绍一下各种跟原型相关的方法
+
+A.isPrototypeOf(B)                 检查A是否是B的原型
+
+Object.getPrototypeOf（B）获取B原型对象
+
+Object.setPrototypeOf(A,B)   把对象B设置为对象A的原型对象
+
+B=Object.create(A)                  把对象A设置为对象B的原型
+
+A.hasOwnProperty(&quot;属性&quot;)    A上是否有对应属性，若属性来自原型链则为false
+
+&quot;属性&quot; in 对象                            A上是否有对应属性，不管来自本对象还是原型链有就是true
+
+hasPrototypeProperty(A,&quot;属性&quot;)    是否只有A的原型有该属性，若A上也有则false
+
+for...in...                                           遍历对象查找的是整条prototype链(不可枚举的Enumberable:false不可以访问)
+
+Object.keys(A)                                 遍历A上可枚举的属性包括prototype链
+
+Object.getOwnPropertyNames(A)   遍历A上所有属性无论能否枚举包括prototype链
+
+Object.values()                                     接收一个对象返回它们内容的数组，对象值的数组
+
+Object.entries()                                    接收一个对象返回它们内容的数组，键值对数组
+
+[[prototype]]链应该就是原型链。
+
+Dog原型链的整个结构基本如下（但是这个还不是真正的继承）
+
+
+
+### 继承（补充优缺点...)
+
+**原型链继承**
+
+举个简单的例子
+
+
+
+具体原型链如下图
+
+![image-20220124151130973.png](https://cdn.nlark.com/yuque/0/2022/png/25385691/1657873908278-b85d5c73-72d0-481c-a93e-00f8760c4869.png#averageHue=%23f4f3f3&amp;clientId=u43e0bddf-219c-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;height=459&amp;id=uab9ba526&amp;name=image-20220124151130973.png&amp;originHeight=688&amp;originWidth=1317&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=31101&amp;status=done&amp;style=none&amp;taskId=ufb7f76ee-f4c2-4f23-b233-4ee02a5d754&amp;title=&amp;width=878)
+
+其中，实现继承的句子是Sub.prototype=new Super()，实现Sub继承Super
+
+最后，s.getSuper(),通过3步搜索s----&gt;Sub.prototype---&gt;Super.prototype最后一步找到这个方法
+
+补充：因为所有的引用类型都继承自Object，所以后面省略的是Object.prototype,Object.prototype的方法有如下，所以自定义的引用类型都有以下这些方法。
+
+
+
+判断继承关系
+
+1. A instanceof B        A是否是B的实例（是 true,否 false)
+2. A.prototype.isPrototypeOf(B)      A是否是B的原型
+
+存在的问题
+
+1.所有继承的属性和方法都会在对象实例间共享，无法做到实例私有（就是一个实例改变了原型链上的属性或方法，其他实例也会改变）
+
+2.子类型在实例化时不能给父类型的构造函数传参
+
+盗用构造函数
+
+利用call或apply方法和改变this指向，实现继承
+
+
+
+优点：解决属性共享问题和向父类构造函数传参问题
+
+缺点：必须在构造函数中定义方法，函数不能重用。子类也不能访问父类原型上定义的方法。
+
+组合继承（最流行的方法）
+
+使用原型链继承原型上的属性和方法，通过盗用构造函数继承实例属性（就是方法在原型链上可以重用，属性用盗用构造函数各个实例可不同）
+
+
+
+缺点：有效率问题，会对父类构造函数调用两次，一次是创建子类原型时，二次是在子类构造函数中调用。
+
+原型式继承
+
+
+
+object函数的原型链图
+
+
+这种继承适合有一个对象，想在它的基础上在创建一个新对象。类似于复制一个对象，然后再对其进行添加。
+
+Object.create()和object方法效果相同。
+
+寄生式继承
+
+其实就是对原型式继承的封装而已，缺点是难以重用。
+
+
+
+寄生式组合继承（这种应该是最有效的继承方式了）
+
+其实就是通过寄生式继承来继承父类原型，然后将返回的新对象赋值给子类原型。
+
+
+五.对象有
+
+## 深拷贝和浅拷贝
+
+### 定义
+
+深拷贝：拷贝的是整个变量，对于引用变量实现的是完全克隆，与原来变量完全没有联系
+
+浅拷贝：只拷贝第一层，对于引用变量实现的是地址引用
+
+### 实现方法
+
+**浅拷贝**
+
+1. Object.assign()
+2. 展开运算符...
+3. Array.prototype.concat()
+4. Array.prototype.slice()
+</code></pre>
+<p>let obj&#x3D;{<br>    a:1,<br>    b:{<br>        c:2<br>    }<br>}<br>let obj1&#x3D;Object.assign({},obj);<br>console.log(obj1.b&#x3D;&#x3D;&#x3D;obj.b);&#x2F;&#x2F;true<br>let obj2&#x3D;{…obj};<br>console.log(obj2.b&#x3D;&#x3D;&#x3D;obj.b)&#x2F;&#x2F;true</p>
+<p>let arr&#x3D;[1,2,{<br>    f:3<br>}]<br>let arr1&#x3D;arr.concat();<br>console.log(arr1.f&#x3D;&#x3D;&#x3D;arr.f);&#x2F;&#x2F;true<br>let arr2&#x3D;arr.slice();<br>console.log(arr2.f&#x3D;&#x3D;&#x3D;arr.f)</p>
+<pre><code>
+**深拷贝**
+
+1.  JSON.parse(JSON.stringify()) 
+2.  递归 
+```javascript
+let obj=&#123;
+    a:1,
+    b:&#123;
+        c:2
+    &#125;
+&#125;
+let obj4=JSON.parse(JSON.stringify(obj))
+console.log(obj4.b===obj.b)//false
+//递归待补充.....
+</code></pre>
+<h2 id="异步问题"><a href="#异步问题" class="headerlink" title="异步问题"></a>异步问题</h2><h3 id="浏览器中的进程、线程、执行机制"><a href="#浏览器中的进程、线程、执行机制" class="headerlink" title="浏览器中的进程、线程、执行机制"></a>浏览器中的进程、线程、执行机制</h3><p>进程与线程的概念具体看操作系统（正在学）</p>
+<p>进程中可以有多个线程并发执行</p>
+<p><strong>js代码怎么执行</strong></p>
+<p>从上往下执行，一行报错后面不执行，先同步后异步</p>
+<p><strong>浏览器有多个线程</strong></p>
+<p>多个线程互相配合从而渲染出页面，这些线程包括了</p>
+<ol>
+<li>js引擎线程：负责执行JS代码</li>
+<li>GUI线程：主要负责将DOM元素渲染到页面上</li>
+<li>http网络请求线程：负责网络请求</li>
+<li>实时触发线程：触发定时器setTimeout、setInterval</li>
+<li>浏览器事件处理线程：onclick，onmouseover</li>
+</ol>
+<p>而UI主线程则负责管理以上这些线程</p>
+<p>js线程和GUI线程是互斥的（跟微任务和宏任务有关）</p>
+<p><strong>JS引擎线程是单线程</strong>？</p>
+<p>因为多线程会很难管理(比如,一个线程是添加一个Dom元素,另一个线程是删除DOM元素就会产生矛盾，不好处理)</p>
+<p><strong>3-5的线程是异步的</strong></p>
+<p>这三个线程被触发后并不会立即执行，而是被推入到一个叫任务队列（eventloop）的地方去，</p>
+<p><strong>UI线程协调运转各个线程</strong></p>
+<p><strong>事件循环&#x2F;轮询</strong></p>
+<p><img src="/JavaScript%E5%9F%BA%E7%A1%80.assets/%E4%BA%8B%E4%BB%B6%E8%BD%AE%E8%AF%A2.png#crop=0&crop=0&crop=1&crop=1&id=eEFDO&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p><strong>宏任务(macroTask)和微任务（microTask)</strong></p>
+<p>为什么有宏任务、微任务？</p>
+<p>为了有些异步任务可以优先执行，不然有新的异步任务只能插入callback queue的队尾。</p>
+<p>宏任务：script(整体代码）、setTimeout、setInterval、ajax、DOM事件、MessageChannel、requestAnimationFrame、I&#x2F;O、UI交互事件<br>微任务：promise、async&#x2F;await、MutationObserver(html5)、Object.observe、process.nextTick</p>
+<p><strong>为什么宏任务比微任务先执行</strong>（这里还要再补充。。。）</p>
+<p>微任务是ES6语法规定的，而宏任务是由浏览器规定的</p>
+<p><strong>微任务执行过程</strong></p>
+<p><img src="/JavaScript%E5%9F%BA%E7%A1%80.assets/image-20220320142144591.png#crop=0&crop=0&crop=1&crop=1&id=ALIkg&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p><strong>完整执行过程</strong></p>
+<p><img src="/JavaScript%E5%9F%BA%E7%A1%80.assets/image-20220320144347510.png#crop=0&crop=0&crop=1&crop=1&id=l57bz&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">></span>
+<span class="token operator">&lt;</span>html lang<span class="token operator">=</span><span class="token string">"en"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>head<span class="token operator">></span>
+    <span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"X-UA-Compatible"</span> content<span class="token operator">=</span><span class="token string">"IE=edge"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>meta name<span class="token operator">=</span><span class="token string">"viewport"</span> content<span class="token operator">=</span><span class="token string">"width=device-width, initial-scale=1.0"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>title<span class="token operator">></span>Document<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">></span>
+<span class="token operator">&lt;</span>body<span class="token operator">></span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"select"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  <span class="token operator">&lt;</span>script<span class="token operator">></span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> select<span class="token operator">=</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"select"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> p1<span class="token operator">=</span><span class="token string">"&lt;p>DOM 渲染&lt;/p>"</span><span class="token punctuation">;</span>
+    select<span class="token punctuation">.</span>innerHTML<span class="token operator">=</span>p1<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//微任务</span>
+    Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'微任务。。。。'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+      <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"宏任务。。。。"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">></span>
+<span class="token comment" spellcheck="true">//123</span>
+<span class="token comment" spellcheck="true">//微任务</span>
+<span class="token comment" spellcheck="true">//DOM渲染</span>
+<span class="token comment" spellcheck="true">//宏任务</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有关单线程的，执行栈、任务队列、同步任务、异步任务</p>
+<p>（涉及一些操作系统暑假再总结）</p>
+<p>let promise&#x3D;new Promise((resolve,reject)&#x3D;&gt;{</p>
+<p>    resolve(‘success’)                                                                      promise.then(resolve&#x3D;&gt;{}).catch(reject&#x3D;&gt;{})</p>
+<p>})</p>
+<p>Promise.resolve(‘success’)&#x2F;Promise.reject(‘fail’)</p>
+<p>promise.all([p1,p2]).then().catch()  (p1,p2是两个promise对象，p1,p2都成功才then)</p>
+<p>promise.race([p1,p2]).then().catch() (p1,p2是两个promise对象，p1,p2先的成功就then)</p>
+<p>asyn function….   asyn返回会延迟，会继续执行后面语句，asyn返回后会继续</p>
+<p>await function  不延迟，await执行完再继续</p>
+<h2 id="什么是柯里化？"><a href="#什么是柯里化？" class="headerlink" title="什么是柯里化？"></a>什么是柯里化？</h2><p>柯里化其实是一种将使用多个参数的一个函数转换成一系列使用一个参数的函数的技术。</p>
+<pre><code> function f(a,b)&#123;
+      return a+b;
+  &#125;
+  //这个就是简单的柯里化
+  function f1(a)&#123;
+      return function f2(b)&#123;
+          return a+b;
+      &#125;
+  &#125;
+  f(1,2);//3
+  f1(1)(2);//3
+</code></pre>
+<p>它的好处？（待补充。。。）</p>
+<h2 id="什么是防抖、节流？"><a href="#什么是防抖、节流？" class="headerlink" title="什么是防抖、节流？"></a>什么是防抖、节流？</h2><p>可继续补充。。。。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>定义</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>防抖debounce</td>
+<td>频繁去触发一个事件，只发送最后一次</td>
+<td>1、input框输入时频繁触发事件可加防抖 2.频繁点击按钮提交表单可加防抖</td>
+</tr>
+<tr>
+<td>节流throttle</td>
+<td>频繁去触发一个事件，但是只能每隔一段时间触发一次</td>
+<td>1、鼠标不断点击触发，mousedown(单位时间内只触发一次)  2、监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断</td>
+</tr>
+</tbody></table>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><h2 id="V8垃圾回收机制"><a href="#V8垃圾回收机制" class="headerlink" title="V8垃圾回收机制"></a>V8垃圾回收机制</h2><h3 id="内存空间"><a href="#内存空间" class="headerlink" title="内存空间"></a>内存空间</h3><h4 id="堆和栈"><a href="#堆和栈" class="headerlink" title="堆和栈"></a>堆和栈</h4><p>调用栈中的执行上下文中存放了相应的变量环境，其中原始类型数据的数据值是直接保存在栈里,而引用类型保存的是引用地址，其值是存放在堆中。</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">1</span>
+<span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"今天是周五~~"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/25385691/1658386585910-b1613021-4520-4082-8b0a-3839c01489b2.jpeg"></p>
+<h4 id="栈中数据回收"><a href="#栈中数据回收" class="headerlink" title="栈中数据回收"></a>栈中数据回收</h4><p>栈中数据的回收是通过栈顶指针ESP下移实现的<br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/25385691/1658387202021-a4b683df-58a3-442e-8ff7-1ea9b0147acb.jpeg"></p>
+<h3 id="V8垃圾回收器"><a href="#V8垃圾回收器" class="headerlink" title="V8垃圾回收器"></a>V8垃圾回收器</h3><p>堆中存放数据的回收就需要用到垃圾回收器了</p>
+<h4 id="代际假说"><a href="#代际假说" class="headerlink" title="代际假说"></a>代际假说</h4><p>代际假说（The Generational Hypothesis）的内容，这是垃圾回收领域中一个重要的术语，后续垃圾回收的策略都是建立在该假说的基础之上的，所以很是重要。<br><strong>代际假说有以下两个特点：</strong></p>
+<ul>
+<li>第一个是大部分对象在内存中存在的时间很短，简单来说，就是很多对象一经分配内存，很快就变得不可访问；</li>
+<li>第二个是不死的对象，会活得更久。</li>
+</ul>
+<p>其实这两个特点不仅仅适用于 JavaScript，同样适用于大多数的动态语言，如 Java、Python 等。<br><strong>V8是采用分代垃圾回收机制</strong><br>在 V8 中会把堆分为新生代和老生代两个区域，新生代中存放的是生存时间短的对象，老生代中存放的生存时间久的对象。（新生代的容量比老生代小）</p>
+<pre class="line-numbers language-javascript"><code class="language-javascript"> <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token operator">|</span> 新生代   <span class="token operator">|</span>   老生代                       <span class="token operator">|</span>  V8分代
+ <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="垃圾回收器工作流程"><a href="#垃圾回收器工作流程" class="headerlink" title="垃圾回收器工作流程"></a>垃圾回收器工作流程</h4><p>第一步，标记空间中活动对象和非活动对象。所谓活动对象就是还在使用的对象，非活动对象就是可以进行垃圾回收的对象。<br>第二步，回收非活动对象所占据的内存。其实就是在所有的标记完成之后，统一清理内存中所有被标记为可回收的对象。<br>第三步，做内存整理。一般来说，频繁回收对象后，内存中就会存在大量不连续空间，我们把这些不连续的内存空间称为<strong>内存碎片</strong>。当内存中出现了大量的内存碎片之后，如果需要分配较大连续内存的时候，就有可能出现内存不足的情况。</p>
+<h3 id="新生代垃圾回收"><a href="#新生代垃圾回收" class="headerlink" title="新生代垃圾回收"></a>新生代垃圾回收</h3><h4 id="新生代垃圾回收过程"><a href="#新生代垃圾回收过程" class="headerlink" title="新生代垃圾回收过程"></a>新生代垃圾回收过程</h4><p>新生代实行垃圾回收的是<strong>副垃圾回收器，</strong>使用Scavenge 算法来处理。所谓 Scavenge 算法，是把新生代空间对半划分为两个区域，一半是对象区域（from区），一半是空闲区域（to区）。<br>新加入的对象都会存放到对象区域，当对象区域快被写满时，就需要执行一次垃圾<strong>清理操作</strong>。</p>
+<ol>
+<li>标记对象，留下活动对象，清除非活动对象</li>
+<li>把存活的活动对象复制到空闲区</li>
+<li>将对象区域和空闲区域进行翻转，原来对象区域变成空闲区域，空闲区域变成对象区域，循环反复进行。</li>
+</ol>
+<p> Scavenge 算法是典型的牺牲空间换时间的方法，只利用了新生代中的对象区，但是每次都需要将存活的对象从对象区域复制到空闲区域，但复制操作需要时间成本，如果新生区空间设置得太大了，那么每次清理的时间就会过久，所以为了执行效率，一般新生区的空间会被设置得比较小。</p>
+<h4 id="对象晋升"><a href="#对象晋升" class="headerlink" title="对象晋升"></a>对象晋升</h4><p>因为新生区的空间不大，所以很容易被存活的对象装满整个区域。为了解决这个问题，JavaScript 引擎采用了对象晋升策略，新生代对象会被移动到老生区中，这就是<strong>晋升</strong><br><strong>晋升条件</strong></p>
+<ul>
+<li><p>对象是否经历过一次Scavenge算法（通过内存地址判断）</p>
+</li>
+<li><p>To空间的内存占比是否已经超过25%</p>
+<h3 id="老生代垃圾回收"><a href="#老生代垃圾回收" class="headerlink" title="老生代垃圾回收"></a>老生代垃圾回收</h3><p>主垃圾回收器主要负责老生区中的垃圾回收。除了新生区中晋升的对象，一些大的对象会直接被分配到老生区。因此老生区中的对象有两个特点，一个是对象占用空间大，另一个是对象存活时间长。<br>主垃圾回收器是采用<strong>标记 - 清除</strong>（Mark-Sweep）和<strong>标记-整理</strong>（Mark-Compact）的算法进行垃圾回收的。</p>
+<h4 id="Mark-Sweep（标记-清除）"><a href="#Mark-Sweep（标记-清除）" class="headerlink" title="Mark-Sweep（标记 - 清除）"></a>Mark-Sweep（标记 - 清除）</h4><p>顾名思义就是进行标记和清除，</p>
+</li>
+<li><p>标记，就是遍历堆中的对象，标记存活着的对象</p>
+</li>
+<li><p>清除，就是清除没有被标记的对象</p>
+</li>
+</ul>
+<p>但是标记清除后会存在许多内存碎片，所以还要进行整理</p>
+<h4 id="Mark-Compact-标记-整理"><a href="#Mark-Compact-标记-整理" class="headerlink" title="Mark-Compact(标记-整理)"></a>Mark-Compact(标记-整理)</h4><p>如果学过操作系统的话应该会懂什么是内存碎片，操作系统内存管理就需要处理内存碎片<br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/25385691/1658390141987-78876bf3-f53c-46db-a05a-e6f2a73edc64.jpeg"></p>
+<p> 就是将存活的对象移动到一段，把空闲的碎片合并</p>
+<h3 id="V8垃圾回收存在的问题和解决"><a href="#V8垃圾回收存在的问题和解决" class="headerlink" title="V8垃圾回收存在的问题和解决"></a>V8垃圾回收存在的问题和解决</h3><h4 id="全停顿"><a href="#全停顿" class="headerlink" title="全停顿"></a>全停顿</h4><p>由于 JavaScript 是运行在主线程之上的，一旦执行垃圾回收算法，都需要将正在执行的 JavaScript 脚本暂停下来，待垃圾回收完毕后再恢复脚本执行。我们把这种行为叫做全停顿（Stop-The-World）<br>这种停顿对新生代的垃圾回收影响并不大，但是对<strong>老生代</strong>影响就比较明显了，容易造成<strong>卡顿</strong></p>
+<h4 id="增量标记"><a href="#增量标记" class="headerlink" title="增量标记"></a>增量标记</h4><p>为了减小停顿时间带来的影响，V8 引入了增量标记，即将可以把一个完整的垃圾回收任务拆分为很多小的任务，这些小的任务执行时间比较短，可以穿插在其他的 JavaScript 任务中间执行，这样就不会长时间无响应。  </p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">John Doe</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://chenyiwei.com.cn/2023/01/28/JavaScript%E7%AC%94%E8%AE%B0/">http://chenyiwei.com.cn/2023/01/28/JavaScript%E7%AC%94%E8%AE%B0/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">John Doe</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'VMiwD5u0KgUm4YAWBBc4qisL-9Nh9j0Va',
+        appKey: 'P1GDMxeKmNSt42I6A2ATwzXk',
+        notify: '' === 'true',
+        verify: '' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'monsterid',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'ぴ夏末ζ烟雨﹌'
+    });
+</script>
+
+<!--酷Q推送-->
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/01/28/JavaScript%E7%AC%94%E8%AE%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/01/28/Vue-router%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A01/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Hexo<br />'
+            + '文章作者: John Doe<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="3136952023"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+				   mini='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">94.9k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "4";
+                        var startDate = "4";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/chen-yi-wei" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2036411905" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2036411905" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <!-- 页面点击小红心 -->
+    <script type="text/javascript" src="/js/love.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
